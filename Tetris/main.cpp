@@ -2,12 +2,13 @@
 
 int main(int argc, char *argv[])
 {
-	//QCoreApplication a(argc, argv);
 	QApplication a(argc, argv);
 
-	std::cout << QString("test").toUtf8().data() << std::endl;
-	QPointer<MainWindow> mainWnd;
-	mainWnd = new MainWindow();
+	//QPointer<MainWindow> mainWnd;
+	//mainWnd = new MainWindow();
+
+	const QString configPath = QString("config.ini");
+	ConfigInstance().loadConfig(configPath);
 
 	return a.exec();
 }
