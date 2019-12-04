@@ -1,6 +1,6 @@
-x64/
-Tetris/x64/
-Tetris/GeneratedFiles/
-ipch/
-Tetris.v12.suo
-Tetris.sdf
+tetris/x64/
+tetris/Tetris/x64/
+tetris/Tetris/GeneratedFiles/
+tetris/ipch/
+tetris/Tetris.v12.suo
+tetris/Tetris.sdf
