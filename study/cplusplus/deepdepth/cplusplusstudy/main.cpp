@@ -317,7 +317,8 @@ int main(int argc, char *argv[]) {
 	//test5();
 	//test6();
 	//test6_1();
-	//test7();
+	test7();
+	std::cout << std::endl;
 	test8();
 
 	//return a.exec();
