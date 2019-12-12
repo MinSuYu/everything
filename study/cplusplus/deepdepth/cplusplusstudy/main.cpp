@@ -4,6 +4,7 @@
 #include <chrono>
 #include <stdlib.h>
 #include <cstring>
+#include <functional>
 
 using namespace std;
 using namespace chrono;
@@ -307,6 +308,8 @@ void test8() {
 	std::cout << lab.count() << std::endl;
 }
 
+typedef std::function<int(int)> Func;
+
 int main(int argc, char *argv[]) {
 	QCoreApplication a(argc, argv);
 
@@ -318,7 +321,27 @@ int main(int argc, char *argv[]) {
 	//test6();
 	//test6_1();
 	//test7();
-	test8();
+	//test8();
+
+	double money = 0;
+	for (int i = 0; i < 12 * 10; i++) {
+		money += 500000;
+		money *= (1.0 + 0.02 / 12);
+	}
+
+	std::cout << money << std::endl;
+
+	int result = 0;
+	Func sum = [&result, &sum](int maxNum) -> int {	
+		if (maxNum <= 1) {
+			return maxNum;
+		}
+		else {
+			return maxNum + sum(maxNum - 1);
+		}
+	};
+
+	std::cout << sum(10) << std::endl;
 
 	//return a.exec();
 	return 0;
