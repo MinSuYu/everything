@@ -1,6 +1,7 @@
 #include "stdafx.h"
+#include "mainwindow.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
 	ui_.setupUi(this);
 
@@ -11,14 +12,10 @@ MainWindow::MainWindow()
 
 	this->setFixedSize(rect.width() / 2, rect.height() / 2);
 	this->move(rect.center() / 2);
-	this->setAttribute(Qt::WA_TranslucentBackground);
 
-	QImage image(QFileInfo(QCoreApplication::applicationDirPath(), "./basicimage.png").absoluteFilePath());
-	QPixmap pixmap = QPixmap::fromImage(image);
-
-	ui_.backgroundLabel->setPixmap(pixmap);
-	ui_.backgroundLabel->move(0, 0);
-	ui_.backgroundLabel->resize(this->width(), this->height());
+	backgroundWindow_ = std::make_unique<BackgroundWindow>(ui_.centralWidget);
+	//backgroundWindow_->load(QSize(rect.width() / 2, rect.height() / 2), QFileInfo(QCoreApplication::applicationDirPath(), "./basicimage.png").absoluteFilePath(), QFileInfo(QCoreApplication::applicationDirPath(), "./basicimage.png").absoluteFilePath());
+	backgroundWindow_->load(QSize(rect.width() / 2, rect.height() / 2), ConfigInstance().basicBackGroundImagePath(), ConfigInstance().playingBackGroundImagePath());
 	
 	show();
 }

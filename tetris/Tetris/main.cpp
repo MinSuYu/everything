@@ -4,11 +4,11 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	const QString configPath = QString("config.ini");
+	const QString configPath = QString("./config.ini");
 	ConfigInstance().loadConfig(configPath);
 
-	QPointer<MainWindow> mainWnd;
-	mainWnd = new MainWindow();
+	std::unique_ptr<MainWindow> mainWnd;
+	mainWnd = std::make_unique<MainWindow>();
 
 	return a.exec();
 }
