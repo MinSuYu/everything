@@ -8,6 +8,6 @@
 #include <iostream>
 
 #include "singleton.h"
-#include "config.h"
 #include "types.h"
+#include "config.h"
 #include "mainwindow.h"

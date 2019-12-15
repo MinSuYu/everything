@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	this->move(rect.center() / 2);
 
 	backgroundWindow_ = std::make_unique<BackgroundWindow>(ui_.centralWidget);
-	//backgroundWindow_->load(QSize(rect.width() / 2, rect.height() / 2), QFileInfo(QCoreApplication::applicationDirPath(), "./basicimage.png").absoluteFilePath(), QFileInfo(QCoreApplication::applicationDirPath(), "./basicimage.png").absoluteFilePath());
 	backgroundWindow_->load(QSize(rect.width() / 2, rect.height() / 2), ConfigInstance().basicBackGroundImagePath(), ConfigInstance().playingBackGroundImagePath());
 	
 	show();
