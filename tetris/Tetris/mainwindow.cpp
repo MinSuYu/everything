@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
-{
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	ui_.setupUi(this);
 
 	setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -19,6 +18,5 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	show();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
 }
