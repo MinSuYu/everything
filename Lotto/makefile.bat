@@ -1,0 +1,1 @@
+copy /y ssl\*.* x64\Debug
