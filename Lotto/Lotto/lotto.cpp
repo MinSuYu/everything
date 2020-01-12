@@ -5,15 +5,6 @@
 
 Lotto::Lotto() {
 	lottoApiFormat_ = QString("https://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=%1");
-
-	if (QSslSocket::supportsSsl()) {
-		qDebug() << QSslSocket::sslLibraryBuildVersionString();
-		qDebug() << "support";
-	}
-	else {
-		qDebug() << QSslSocket::sslLibraryBuildVersionString();
-		qDebug() << "not support";
-	}
 }
 
 Lotto::~Lotto() {
@@ -22,25 +13,17 @@ Lotto::~Lotto() {
 
 void Lotto::start() {
 	for (int i = 1; i < 2; i++) {
-		lottoApiUrl_ = lottoApiFormat_.arg(i);
+		QString lottoApiUrl = lottoApiFormat_.arg(i);
 
-		QByteArray temp = requestNetwork(lottoApiUrl_);
+		QByteArray temp = requestNetwork(lottoApiUrl);
 	}
-}
-
-void Lotto::test(const QString& url) {
-	QSslSocket socket;
-	socket.connectToHostEncrypted(url, 443);
-	socket.write("GET / HTTP/1.0\r\n\r\n");
-	while (socket.waitForReadyRead())
-		std::cout << socket.readAll().data() << std::endl;
 }
 
 QByteArray Lotto::requestNetwork(const QString& url) {
 	QByteArray byteArray;
 	QNetworkRequest request(url);
-	request.setHeader(QNetworkRequest::ContentTypeHeader, "text/html");
-	//request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+	//request.setHeader(QNetworkRequest::ContentTypeHeader, "text/html");
+	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	QNetworkReply* reply = nullptr;
 	QNetworkAccessManager* manager = new QNetworkAccessManager();
 	
@@ -72,35 +55,6 @@ QByteArray Lotto::requestNetwork(const QString& url) {
 			manager->deleteLater();
 		}
 	});
-
-	return byteArray;
-}
-
-QByteArray Lotto::syncNetworkRequest(const QString& url) {
-	QByteArray byteArray;
-	QNetworkRequest request(url);
-	QNetworkAccessManager* manager = new QNetworkAccessManager();
-	QNetworkReply* reply = manager->get(request);
-	QEventLoop loop;
-
-	connect(reply, &QIODevice::readyRead, [this, reply, &byteArray] {
-		byteArray += reply->readAll();
-	});
-
-	connect(reply, &QNetworkReply::finished, [this, &loop] {
-		loop.exit();
-	});
-
-	connect(reply, static_cast<void (QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::error), [this, reply, &byteArray, &loop](QNetworkReply::NetworkError) {
-		qDebug() << "error" << reply->errorString();
-		qDebug() << "received" << byteArray;
-		byteArray.clear();
-		loop.exit();
-	});
-
-	loop.exec();
-	reply->deleteLater();
-	manager->deleteLater();
 
 	return byteArray;
 }
