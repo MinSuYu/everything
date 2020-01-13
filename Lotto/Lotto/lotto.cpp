@@ -12,28 +12,29 @@ Lotto::~Lotto() {
 }
 
 void Lotto::start() {
-	for (int i = 1; i < 2; i++) {
+	for (int i = 1; i < 820; i++) {
 		QString lottoApiUrl = lottoApiFormat_.arg(i);
-
-		QByteArray temp = requestNetwork(lottoApiUrl);
+		QByteArray byteArray = requestNetwork(lottoApiUrl);
+		std::cout << byteArray.data() << std::endl;
 	}
+	std::cout << "end" << std::endl;
 }
 
 QByteArray Lotto::requestNetwork(const QString& url) {
 	QByteArray byteArray;
 	QNetworkRequest request(url);
-	//request.setHeader(QNetworkRequest::ContentTypeHeader, "text/html");
-	request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+	request.setHeader(QNetworkRequest::ContentTypeHeader, "text/html");
 	QNetworkReply* reply = nullptr;
 	QNetworkAccessManager* manager = new QNetworkAccessManager();
+	QEventLoop eventLoop;
 	
 	reply = manager->get(request);
 
-	connect(reply, &QNetworkReply::finished, [this, reply, manager]{
+	connect(reply, &QNetworkReply::finished, [this, reply, manager, &byteArray, &eventLoop]{
 		if (reply) {
-			//QString temp = QString(reply->readAll());
-			std::cout << reply->readAll().data() << std::endl;
+			byteArray = reply->readAll();
 			reply->deleteLater();
+			eventLoop.exit();
 		}
 
 		if (manager) {
@@ -56,5 +57,6 @@ QByteArray Lotto::requestNetwork(const QString& url) {
 		}
 	});
 
+	eventLoop.exec();
 	return byteArray;
 }

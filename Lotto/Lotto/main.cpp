@@ -1,4 +1,3 @@
-//#include <QtCore/QCoreApplication>
 #include "stdafx.h"
 #include "lotto.h"
 
