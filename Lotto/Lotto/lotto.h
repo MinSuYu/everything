@@ -3,7 +3,9 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QEventLoop>
-#include <QSslConfiguration>
+
+#include <QJsonDocument>
+#include <QJsonObject>
 
 class Lotto : public QObject {
 public:
@@ -13,7 +15,10 @@ public:
 public:
 	void start();
 	QByteArray requestNetwork(const QString& url);
+	bool parsingData(const QByteArray& data);
 
 private:
 	QString lottoApiFormat_;
+	bool isContinue_ = true;
+	QList<QVector<int>> numberList_;
 };

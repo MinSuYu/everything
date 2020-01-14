@@ -12,12 +12,16 @@ Lotto::~Lotto() {
 }
 
 void Lotto::start() {
-	for (int i = 1; i < 820; i++) {
-		QString lottoApiUrl = lottoApiFormat_.arg(i);
+	int count = 0;
+	while (isContinue_) {
+		QString lottoApiUrl = lottoApiFormat_.arg(++count);
 		QByteArray byteArray = requestNetwork(lottoApiUrl);
-		std::cout << byteArray.data() << std::endl;
+		isContinue_ = parsingData(byteArray);
 	}
-	std::cout << "end" << std::endl;
+	std::cout << "end count : " << count << std::endl;
+	for (int i = 0; i < numberList_.size(); i++) {
+		qDebug() << "count : " << i + 1 << " , " << numberList_.value(i);
+	}
 }
 
 QByteArray Lotto::requestNetwork(const QString& url) {
@@ -59,4 +63,34 @@ QByteArray Lotto::requestNetwork(const QString& url) {
 
 	eventLoop.exec();
 	return byteArray;
+}
+
+bool Lotto::parsingData(const QByteArray& data) {
+	QJsonDocument jsonDocument = QJsonDocument::fromJson(data);
+
+	if (!jsonDocument.isNull()) {
+		QJsonObject rootObject = jsonDocument.object();
+		if (!rootObject.isEmpty()) {
+			if (rootObject.value("returnValue").toString().compare("fail")) {
+				QVector<int> parsingNumberList;
+				parsingNumberList.resize(7);
+				parsingNumberList[0] = rootObject.value("drwtNo1").toInt();
+				parsingNumberList[1] = rootObject.value("drwtNo2").toInt();
+				parsingNumberList[2] = rootObject.value("drwtNo3").toInt();
+				parsingNumberList[3] = rootObject.value("drwtNo4").toInt();
+				parsingNumberList[4] = rootObject.value("drwtNo5").toInt();
+				parsingNumberList[5] = rootObject.value("drwtNo6").toInt();
+				parsingNumberList[6] = rootObject.value("bnusNo").toInt();
+				numberList_.push_back(parsingNumberList);
+			}
+			else {
+				return false;
+			}
+		}
+	}
+	else {
+		return false;
+	}
+
+	return true;
 }
