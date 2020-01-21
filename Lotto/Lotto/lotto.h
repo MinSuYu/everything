@@ -21,4 +21,5 @@ private:
 	QString lottoApiFormat_;
 	bool isContinue_ = true;
 	QList<QVector<int>> numberList_;
+	QVector<int> numberCount_;
 };

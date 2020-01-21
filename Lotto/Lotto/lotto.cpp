@@ -17,10 +17,24 @@ void Lotto::start() {
 		QString lottoApiUrl = lottoApiFormat_.arg(++count);
 		QByteArray byteArray = requestNetwork(lottoApiUrl);
 		isContinue_ = parsingData(byteArray);
+
+		std::cout << "ing... count : " << count << std::endl;
 	}
+	numberCount_.resize(45);
 	std::cout << "end count : " << count << std::endl;
 	for (int i = 0; i < numberList_.size(); i++) {
-		qDebug() << "count : " << i + 1 << " , " << numberList_.value(i);
+		QVector<int> oneTimeNumber = numberList_.value(i);
+		qDebug() << "count : " << i + 1 << " , " << oneTimeNumber;
+		for (int j = 0; j < 6; j++) {
+			numberCount_[oneTimeNumber[j] - 1]++;
+		}
+	}
+
+	for (int i = 0; i < numberCount_.size(); i++) {
+		std::cout << i + 1 << " : " << numberCount_[i] << ", ";
+		if ((i % 5) == 0) {
+			std::cout << std::endl;
+		}
 	}
 }
 
