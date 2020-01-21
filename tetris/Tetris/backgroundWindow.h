@@ -15,4 +15,6 @@ private:
 private:
 	QImage basicImage_;
 	QImage playingImage_;
+
+	bool isPlaying_ = true;
 };
