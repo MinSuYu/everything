@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "databasepool.h"
+#include "../inc/databasepool.h"
 
 namespace lottoapiserver {
 	DatabasePool::DatabasePool() {

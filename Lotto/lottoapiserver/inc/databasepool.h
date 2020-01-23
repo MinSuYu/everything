@@ -1,5 +1,10 @@
 #pragma once
 
+//#include <QSqlDatabase>
+#include <QtSql/qsqldatabase.h>
+
+#include <memory>
+
 namespace lottoapiserver {
 	class DatabasePool {
 	public:

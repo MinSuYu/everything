@@ -32,10 +32,10 @@
     <ClCompile Include="src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="inc\databasepool.cpp">
+    <ClCompile Include="src\databasepool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="inc\lottoapiserver.cpp">
+    <ClCompile Include="src\lottoapiserver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,8 +49,8 @@
     <ClInclude Include="inc\lottoapiserver.h">
       <Filter>inc</Filter>
     </ClInclude>
-    <ClInclude Include="lottoapiserver_global.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="inc\lottoapiserver_global.h">
+      <Filter>inc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
