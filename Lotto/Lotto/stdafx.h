@@ -1,3 +1,4 @@
 #pragma once
 
-#include <QtCore/QCoreApplication>
+#include <QtCore>
+#include <lottoapiserver/inc/lottoapiserver.h>
