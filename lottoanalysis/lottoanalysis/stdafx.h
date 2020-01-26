@@ -1,3 +1,5 @@
 #pragma once
 
-#include <QtCore/QCoreApplication>
+#include <QtCore>
+
+#include <networkdata/inc/networkdata.h>
