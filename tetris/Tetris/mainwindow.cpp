@@ -25,5 +25,6 @@ MainWindow::~MainWindow() {
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
 	//qDebug() << event->key();
-	backgroundWindow_->setIsPlaying(true);
+	//backgroundWindow_->setIsPlaying(true);
+	event->ignore();
 }

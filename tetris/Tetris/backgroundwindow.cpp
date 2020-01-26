@@ -2,7 +2,12 @@
 #include "backgroundwindow.h"
 
 BackgroundWindow::BackgroundWindow(QWidget *parent) : QWidget(parent) {
-
+	timer_ = new QTimer();
+	timer_->setInterval(500);
+	connect(timer_, &QTimer::timeout, [this](){
+		repaint();
+	});
+	timer_->start();
 }
 
 BackgroundWindow::~BackgroundWindow() {
@@ -23,7 +28,7 @@ void BackgroundWindow::load(const QSize& size, const QString& basicPath, const Q
 
 void BackgroundWindow::setIsPlaying(const bool isPlaying) {
 	isPlaying_ = !isPlaying_;
-	repaint();
+	//repaint();
 }
 
 void BackgroundWindow::paintEvent(QPaintEvent *event) {
@@ -43,4 +48,8 @@ void BackgroundWindow::paintEvent(QPaintEvent *event) {
 			windowsSize_.height() / 2 + (windowsSize_.height() / 10) * 3),
 			gameEndImage_.scaled(QSize(windowsSize_.width() / 5, windowsSize_.height() / 10)));
 	}
+}
+
+void BackgroundWindow::keyPressEvent(QKeyEvent *event) {
+	isPlaying_ = !isPlaying_;
 }

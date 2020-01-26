@@ -12,8 +12,11 @@ public:
 
 private:
 	void paintEvent(QPaintEvent *event) override;
+	void keyPressEvent(QKeyEvent *event) override;
 
 private:
+	QTimer *timer_ = nullptr;
+
 	QImage basicImage_;
 	QImage playingImage_;
 	QImage gameStartImage_;
