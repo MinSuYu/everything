@@ -13,10 +13,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 	this->move(rect.center() / 2);
 
 	backgroundWindow_ = std::make_unique<BackgroundWindow>(ui_.centralWidget);
-	backgroundWindow_->load(QSize(rect.width() / 2, rect.height() / 2), ConfigInstance().basicBackGroundImagePath(), ConfigInstance().playingBackGroundImagePath());
+	backgroundWindow_->load(QSize(rect.width() / 2, rect.height() / 2), 
+		ConfigInstance().basicBackGroundImagePath(), ConfigInstance().playingBackGroundImagePath(), 
+		ConfigInstance().gameStartButtonImagePath(), ConfigInstance().gameEndButtonImagePath());
 	
 	show();
 }
 
 MainWindow::~MainWindow() {
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+	//qDebug() << event->key();
+	backgroundWindow_->setIsPlaying(true);
 }

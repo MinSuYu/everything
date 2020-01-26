@@ -10,6 +10,9 @@ public:
 	~MainWindow();
 
 private:
+	void keyPressEvent(QKeyEvent *event) override;
+
+private:
 	Ui::MainWindow ui_;
 
 	std::unique_ptr<BackgroundWindow> backgroundWindow_;
