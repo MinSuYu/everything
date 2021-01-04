@@ -15,7 +15,8 @@ void Lotto::start() {
 	int count = 0;
 	while (isContinue_) {
 		QString lottoApiUrl = lottoApiFormat_.arg(++count);
-		QByteArray byteArray = requestNetwork(lottoApiUrl);
+		//QByteArray byteArray = requestNetwork(lottoApiUrl);
+		QByteArray byteArray = "";
 		isContinue_ = parsingData(byteArray);
 
 		std::cout << "ing... count : " << count << std::endl;
