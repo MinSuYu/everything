@@ -5,7 +5,7 @@
 
 namespace networkdata {
 	NetworkData::NetworkData() {
-		lottoApiFormat_ = QString("https://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=%1");
+		lottoApiFormat_ = QString("https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=%1");
 	}
 
 	NetworkData::~NetworkData() {
