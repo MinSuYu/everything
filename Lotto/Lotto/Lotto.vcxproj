@@ -89,7 +89,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>lottoapiserver.lib</AdditionalDependencies>
+      <AdditionalDependencies>lottoapiserver.lib;Qt5Network.lib;qtmaind.lib;Qt5Cored.lib;Qt5Sqld.lib</AdditionalDependencies>
     </Link>
     <QtMoc>
       <Define>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_NETWORK_LIB;%(PreprocessorDefinitions)</Define>
